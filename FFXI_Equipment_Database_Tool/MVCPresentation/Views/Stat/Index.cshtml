@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DataObjects.StatVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Stats</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Stat Name
+        </th>
+        <th>
+            Aliases
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @*<button onclick="toggleAliasVisibility('@item.Name')">Aliases</button>*@
+                <button class="btn btn-outline-secondary btn-sm collapsed" type="button" data-toggle="collapse" data-target="#@item.Name" aria-expanded="false" aria-controls="@item.Name">
+                    Aliases
+                </button>
+                <div id="@item.Name" class="collapse">
+                    @foreach (string statAlias in item.AliasList)
+                    {
+                        <p>@statAlias</p>
+                    }
+                </div>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Name })
+                @*Not doing a Delete action for something this volatile|*@
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Name })*@
+            </td>
+        </tr>
+    }
+</table>

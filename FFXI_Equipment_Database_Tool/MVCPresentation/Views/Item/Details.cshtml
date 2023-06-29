@@ -1,0 +1,49 @@
+﻿@model DataObjects.ItemVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ItemVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.ItemStats)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ItemStats)
+        </dd>
+        @foreach (var stat in Model.ItemStats)
+        {
+            <dt>
+                @stat.Key
+            </dt>
+
+            <dd>
+                @stat.Value
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
